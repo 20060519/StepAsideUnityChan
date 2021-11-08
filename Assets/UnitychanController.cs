@@ -27,6 +27,12 @@ public class UnitychanController : MonoBehaviour
     private GameObject scoreText;
     //得点
     private int score = 0;
+    //左ボタン押下の判定
+    private bool isLButtonDown = false;
+    //右ボタン押下の判定
+    private bool isRButtonDown = false;
+    //ジャンプボタン押下の判定
+    private bool isJButtonDown = false;
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +63,7 @@ public class UnitychanController : MonoBehaviour
             this.velocityY *= this.coefficient;
             this.myAnimator.speed *= this.coefficient;
         }
+
 
         //横方向の入力による速度
         float inputVelocityX = 0;
@@ -129,4 +136,42 @@ public class UnitychanController : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
+
+    //ジャンプボタンを押したときの処理
+    public void GetMyJumpButtonDown()
+    {
+        this.isJButtonDown = true;
+    }
+    //ジャンプボタンを離したときの処理
+    public void GetMyJumpButtonUp()
+    {
+        this.isJButtonDown = false;
+    }
+    //左ボタンを押し続けた場合の処理
+    public void GetMyLeftButtonDown()
+    {
+        this.isLButtonDown = true;
+    }
+    //左ボタンを離したときの処理
+    public void GetMyLeftButtonUp()
+    {
+        this.isLButtonDown = false;
+    }
+    //右ボタンを押し続けた場合の処理
+    public void GetMyRightButtonDown()
+    {
+        this.isRButtonDown = true;
+    }
+    //右ボタンを離したときの処理
+    public void GetMyRightButtonUp()
+    {
+        this.isRButtonDown = false;
+    }
+
+    //通りすぎたアイテムを破棄
+    private void OnBecameVisible()
+    {
+        GameObject.Destroy(this.gameObject);
+    }
+
 }
