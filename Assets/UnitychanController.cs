@@ -49,7 +49,7 @@ public class UnitychanController : MonoBehaviour
         //シーンの中のstateTextオブジェクトを取得
         this.stateText = GameObject.Find("GameResultText");
         //シーンの中のscoreTextオブジェクトを取得
-        this.stateText = GameObject.Find("ScoreText");
+        this.scoreText = GameObject.Find("ScoreText");
     }
 
     // Update is called once per frame
@@ -71,19 +71,19 @@ public class UnitychanController : MonoBehaviour
         float inputVelocityY = 0;
 
         //Unityちゃんを矢印キーまたはボタンに応じて左右に移動させる
-        if (Input.GetKey(KeyCode.LeftArrow) && -this.movableRange < this.transform.position.x) 
+        if ( (Input.GetKey(KeyCode.LeftArrow) || this.isLButtonDown ) && -this.movableRange < this.transform.position.x) 
         {
             //左方向への速度を代入
             inputVelocityX = -this.velocityX;
         }
-        else if (Input.GetKey(KeyCode.RightArrow) && this.transform.position.x < this.movableRange)
+        else if ( (Input.GetKey(KeyCode.RightArrow) || this.isRButtonDown) && this.transform.position.x < this.movableRange)
         {
             //右方向への速度を代入
             inputVelocityX = this.velocityX;
         }
 
         //ジャンプしていない時にスペースが押されたらジャンプする
-        if (Input.GetKeyDown(KeyCode.Space) && this.transform.position.y > 0.5f )
+        if (Input.GetKeyDown(KeyCode.Space) && this.transform.position.y < 0.5f )
         {
             //ジャンプアニメを再生
             this.myAnimator.SetBool("Jump", true);
@@ -114,8 +114,8 @@ public class UnitychanController : MonoBehaviour
         if (other.gameObject.tag == "CarTag" || other.gameObject.tag == "TrafficConeTag") ;
         {
             this.isEnd = true;
-            //stateTextにGAME ClEARを表示
-            this.stateText.GetComponent<Text>().text = "CLEAR!!";
+            //stateTextにGAME Overを表示
+            this.stateText.GetComponent<Text>().text = "GameOver!!";
         }
         //ゴール地点に到着した場合
         if (other.gameObject.tag == "GoalTag") 
@@ -168,10 +168,5 @@ public class UnitychanController : MonoBehaviour
         this.isRButtonDown = false;
     }
 
-    //通りすぎたアイテムを破棄
-    private void OnBecameVisible()
-    {
-        GameObject.Destroy(this.gameObject);
-    }
 
 }
