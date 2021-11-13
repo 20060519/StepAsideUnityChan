@@ -83,7 +83,7 @@ public class UnitychanController : MonoBehaviour
         }
 
         //ジャンプしていない時にスペースが押されたらジャンプする
-        if (Input.GetKeyDown(KeyCode.Space) && this.transform.position.y < 0.5f )
+        if ((Input.GetKeyDown(KeyCode.Space) || this.isJButtonDown) && this.transform.position.y < 0.5f)
         {
             //ジャンプアニメを再生
             this.myAnimator.SetBool("Jump", true);
@@ -121,6 +121,8 @@ public class UnitychanController : MonoBehaviour
         if (other.gameObject.tag == "GoalTag") 
         {
             this.isEnd = true;
+            //stateTextにゲームクリアと表示
+            this.stateText.GetComponent<Text>().text = "Clear";
         }
         //コインに衝突した場合
         if (other.gameObject.tag == "CoinTag")

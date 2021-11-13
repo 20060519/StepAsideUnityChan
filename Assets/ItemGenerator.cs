@@ -51,7 +51,7 @@ public class ItemGenerator : MonoBehaviour
                         GameObject coin = Instantiate(coinPrefab);
                         coin.transform.position = new Vector3(posRange * j, coin.transform.position.y, i + offsetZ);
                     }
-                    else if (7 <= item && item <= 9) ;
+                    else if (7 <= item && item <= 9) 
                     {
                         //ŽÔ‚ð¶¬
                         GameObject car = Instantiate(carPrefab);
