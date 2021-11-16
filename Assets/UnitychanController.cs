@@ -111,7 +111,7 @@ public class UnitychanController : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         //áŠQ•¨‚ÉÕ“Ë‚µ‚½ê‡
-        if (other.gameObject.tag == "CarTag" || other.gameObject.tag == "TrafficConeTag") ;
+        if (other.gameObject.tag == "CarTag" || other.gameObject.tag == "TrafficConeTag") 
         {
             this.isEnd = true;
             //stateText‚ÉGAME Over‚ğ•\¦
